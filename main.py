@@ -1,6 +1,19 @@
 import requests
 
-def fetch_data_from_api(url):
+def fetch_data_from_api(url: str) -> dict:
+    """
+    Send a GET request to a given URL and return the response as a dictionary.
+
+    Parameters
+    ----------
+    url : str
+        The URL to send the GET request to.
+
+    Returns
+    -------
+    dict or None
+        If the request was successful, the response as a dictionary. Otherwise None.
+    """
     try:
         # Отправка GET-запроса
         response = requests.get(url)
@@ -17,7 +30,25 @@ def fetch_data_from_api(url):
         return None
 
 
-def get_final_dict(data):
+def get_final_dict(data: list) -> dict:
+    """
+    Process a list of data dictionaries to extract and return a final dictionary
+    containing specific metadata and achievements.
+
+    Parameters
+    ----------
+    data : list of dict
+        A list of data dictionaries, each having keys that map to individual
+        dictionaries containing 'metadata' and 'achievements'.
+
+    Returns
+    -------
+    dict
+        A dictionary where each key corresponds to a key in the input data
+        dictionaries and the value is a dictionary including 'metadata' and 
+        'achievements'. The 'achievements' include only those present in the 
+        second data dictionary but not in the first.
+    """
     final_dict = dict()
 
     for data_key in data[0].keys():
